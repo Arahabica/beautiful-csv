@@ -105,6 +105,7 @@ function renderResult(name, content) {
   html += '<pre>' + content + '</pre>';
   elem.innerHTML = html;
 }
+/*
 document.getElementById('import-excel').addEventListener('change', function (evt) {
   var files = evt.target.files;
   var i, f;
@@ -114,3 +115,4 @@ document.getElementById('import-excel').addEventListener('change', function (evt
     });
   }
 }, false);
+*/

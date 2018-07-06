@@ -1,0 +1,65 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.drag-and-drop-area {
+  color: #ccc;
+  height: 90%;
+  margin: 2%;
+  border-style: dashed;
+  border-width: 2px;
+  line-height: 200px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.drag-and-drop-area-over {
+  border-color: #0000FF;
+}
+
+.drag-and-drop-area-over span {
+  opacity: 0.2;
+}
+
+.drag-and-drop-area-out {
+  border-color: #ccc;
+}
+
+.drag-and-drop-area-out span {
+  opacity: 1;
+}
+.hidden {
+	display: none;
+}
+#toasts {
+  position: absolute;
+  top:0;
+  left:0;
+}
+#toasts .converting {
+  background-color: #e74c3c;
+}
+#toasts .success {
+  background-color: #2ecc71;
+}
+#toasts .error {
+  background-color: #ff0000;
+}
+#toasts .password {
+  background-color: #2980b9;
+}
+.toast {
+  width: 400px;
+  height: 50px;
+  padding: 15px;
+  margin: 15px;
+  opacity: 0.8;
+  color: #ffffff;
+}
+.toast-head {
+  font-size: 1.25em;
+}
+.toast-content {
+  text-align: right;
+}
