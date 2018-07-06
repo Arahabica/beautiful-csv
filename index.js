@@ -30,8 +30,10 @@ function toastConverting($toast) {
     $toast.addClass('converting');
     $toast.find('.toast-content').text('converting...');
 }
-function toastSuccess($toast) {
-    console.log("success");
+function toastSuccess($toast, filename) {
+    if (filename) {
+    $toast.find('.toast-head').text(filename);
+    }
     $toast.find('.toast-content').text('Success');
     $toast.removeClass('error');
     $toast.removeClass('converting');
@@ -63,43 +65,23 @@ function toastError($toast, message) {
         $(this).remove();
     });
 }
-/*
-function render(file) {
-    var $toast = createToast(file.name);
-    $('#toasts').append($toast);
-    if (file.type != 'application/pdf') {
-        toastError($toast, 'It is not PDF file.');
-        return;
-    }
-    toastConverting($toast);
-    var filename = "index.html";
-    if (/\./.test(file.name)) {
-        filename = file.name.replace(/\.[^\.]*$/,".html");
-    }
-    var fileReader = new FileReader();
-    fileReader.onload = function(ev) {
-        renderPDF($('<div>'), fileReader.result, filename, null, function(data){
-            saveText(data, filename);
-            toastSuccess($toast);
-        }, function(message) {
-            toastError($toast, message);
-        }, function(callback) {
-            toastPassword($toast, callback);
-        });
-    }
-    fileReader.readAsArrayBuffer(file);
-}
-*/
 function render(file) {
     var $toast = createToast(file.name);
     $('#toasts').append($toast);
     toastConverting($toast);
 
-    var er = new ExcelJs.Reader(file, function (eve, xlsx) {
-      var filename = file.name.replace(".xlsm", "") + ".csv";
-      var data = xlsx.toCsv();
-      saveText(data, filename);
-      toastSuccess($toast);
+    new ExcelJs.Reader(file, function (err, xlsx) {
+        if (err) {
+            toastError($toast, err.message);
+        } else {
+          var filename = file.name
+            .replace(/\.xlsm$/, "")
+            .replace(/\.xlsx$/, "")
+            + ".csv";
+          var data = xlsx.toCsv();
+          saveText(data, filename);
+          toastSuccess($toast, filename);
+        }
     });
 }
 $(function(){

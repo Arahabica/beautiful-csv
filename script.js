@@ -76,7 +76,11 @@
       var arr = handleCodePoints(new Uint8Array(data));
 
       if (typeof onload === 'function') {
-        onload(e, new ExcelJs.File(file, XLSX.read(btoa(arr), {type: 'base64', cellDates: true})));
+        try {
+          onload(null, new ExcelJs.File(file, XLSX.read(btoa(arr), {type: 'base64', cellDates: true})));
+        } catch (err) {
+          onload(err, null);
+        }
       }
     };
     reader.readAsArrayBuffer(file);
@@ -105,14 +109,3 @@ function renderResult(name, content) {
   html += '<pre>' + content + '</pre>';
   elem.innerHTML = html;
 }
-/*
-document.getElementById('import-excel').addEventListener('change', function (evt) {
-  var files = evt.target.files;
-  var i, f;
-  for (i = 0, f = files[i]; i != files.length; ++i) {
-    var er = new ExcelJs.Reader(f, function (e, xlsx) {
-      renderResult(xlsx.getFile().name, xlsx.toCsv());
-    });
-  }
-}, false);
-*/

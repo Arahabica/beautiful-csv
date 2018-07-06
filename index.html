@@ -4,19 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Beautiful csv</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="./main.css" rel="stylesheet"/>
   </head>
   <body>
-
     <input id="file_input" type="file" class="hidden" multiple="multiple">
     <div class="drag-and-drop-area drag-and-drop-area-out">
         <span>
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
             Drag and drop your Excel files.
         </span>
+        <ul>
+            <li>UTF-8 without a BOM</li>
+            <li>Line separator is LF</li>
+            <li>Ignore formatting in excel</li>
+        </ul>
     </div>
     <div id="toasts"></div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

@@ -8,7 +8,7 @@ html, body {
   margin: 2%;
   border-style: dashed;
   border-width: 2px;
-  line-height: 200px;
+  padding-top: 100px;
   text-align: center;
   cursor: pointer;
   font-size: 30px;
@@ -62,4 +62,8 @@ html, body {
 }
 .toast-content {
   text-align: right;
+}
+
+ul {
+  list-style-type: none;
 }
