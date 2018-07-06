@@ -43,19 +43,6 @@ function toastSuccess($toast, filename) {
         $(this).remove();
     });
 }
-function toastPassword($toast, callback) {
-    $toast.find('.toast-content').text('');
-    $toast.find('.toast-content')
-        .append($('<span>').text('pass: '))
-        .append($('<input type="password">'));
-    $toast.removeClass('converting');
-    $toast.addClass('password');
-    $toast.find('input').change(function(){
-        var pass = $toast.find('input').val();
-        toastConverting($toast);
-        callback(pass);
-    });
-}
 function toastError($toast, message) {
     console.log("error", message);
     $toast.find('.toast-content').text(message);
@@ -77,6 +64,7 @@ function render(file) {
           var filename = file.name
             .replace(/\.xlsm$/, "")
             .replace(/\.xlsx$/, "")
+            .replace(/\.csv$/, "")
             + ".csv";
           var data = xlsx.toCsv();
           saveText(data, filename);

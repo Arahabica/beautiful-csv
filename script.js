@@ -14,7 +14,10 @@
       },
       toCsv: function () {
         var result = "";
-        var activeTab = workbook.Workbook.WBView[0].activeTab;
+        var activeTab = 0;
+        if (workbook.Workbook.WBView && workbook.Workbook.WBView.length > 0 && workbook.Workbook.WBView[0].activeTab) {
+          activeTab = workbook.Workbook.WBView[0].activeTab;
+        }
         var sheet = workbook.Sheets[workbook.SheetNames[activeTab]];
         var range = sheet["!ref"];
         var last_column = range.replace(/^.*:/,"").replace(/[0-9]*$/,"");
@@ -70,9 +73,6 @@
 
     reader.onload = function(e) {
       var data = e.target.result;
-      // データが多いとString.fromCharCode()でMaximum call stack size exceededエラーとなるので、
-      // 別途関数で処理をする。
-      //var arr = String.fromCharCode.apply(null, new Uint8Array(data));
       var arr = handleCodePoints(new Uint8Array(data));
 
       if (typeof onload === 'function') {
@@ -87,7 +87,6 @@
   };
 })(window, window.document);
 
-// see: https://github.com/mathiasbynens/String.fromCodePoint/issues/1
 function handleCodePoints(array) {
   var CHUNK_SIZE = 0x8000; // arbitrary number here, not too small, not too big
   var index = 0;
@@ -100,12 +99,4 @@ function handleCodePoints(array) {
     index += CHUNK_SIZE;
   }
   return result;
-}
-
-function renderResult(name, content) {
-  var elem = document.getElementById('result');
-  var html = elem.innerHTML;
-  html += '<h3>' + name + '</h3>';
-  html += '<pre>' + content + '</pre>';
-  elem.innerHTML = html;
 }
