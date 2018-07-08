@@ -49,18 +49,18 @@ html, body {
 #toasts .password {
   background-color: #2980b9;
 }
-.toast {
+#toasts .toast {
   width: 400px;
-  height: 50px;
+  /*height: 50px;*/
   padding: 15px;
   margin: 15px;
   opacity: 0.8;
   color: #ffffff;
 }
-.toast-head {
+#toasts .toast-head {
   font-size: 1.25em;
 }
-.toast-content {
+#toasts .toast-content {
   text-align: right;
 }
 

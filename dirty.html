@@ -4,30 +4,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Beautiful csv</title>
+    <title>Dirty csv</title>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="./main.css" rel="stylesheet"/>
+      <style>
+          body {
+              background-color: #f4fec8;
+          }
+      </style>
   </head>
   <body>
     <input id="file_input" type="file" class="hidden" multiple="multiple">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a class="nav-link disabled" href="./">Excel => UTF-8 CSV without BOM</a>
+            <a class="nav-link" href="./">Excel => UTF-8 CSV without BOM</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="./dirty.html">UTF-8 CSV without BOM => SJIS CSV with BOM</a>
+            <a class="nav-link disabled" href="./dirty.html">UTF-8 CSV without BOM => SJIS CSV with BOM</a>
         </li>
     </ul>
     <div class="drag-and-drop-area drag-and-drop-area-out">
         <span>
-        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-            Drag and drop your Excel files.
+        <i class="fa fa-table" aria-hidden="true"></i>
+            Drag and drop your UTF-8 CSV files without BOM.
         </span>
         <ul>
-            <li>UTF-8 without a BOM</li>
-            <li>Line separator is LF</li>
-            <li>Ignore formatting in excel</li>
+            <li> => SJIS CSV with BOM.</li>
         </ul>
     </div>
     <div id="toasts"></div>
@@ -38,7 +41,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
     <script src="ExcelJs.js"></script>
     <script src="DDLoader.js"></script>
-    <script src="index.js"></script>
+    <script src="encoding.min.js"></script>
+    <script src="dirty.js"></script>
 
   </body>
 </html>
