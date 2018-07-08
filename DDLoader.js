@@ -16,7 +16,6 @@ var DDLoader = (function() {
       e.preventDefault();
       var files = e.originalEvent.dataTransfer.files;
       for (var i = 0; i < files.length; i++) {
-        //render(files[i]);
         that.render(files[i], callback);
       }
     });
@@ -27,7 +26,6 @@ var DDLoader = (function() {
     $("#file_input").change(function() {
       var files = $(this).prop("files");
       for (var i = 0; i < files.length; i++) {
-        //render(files[i]);
         that.render(files[i], callback);
       }
     });
@@ -43,7 +41,7 @@ var DDLoader = (function() {
   };
 
   DDLoader.prototype.saveSJIS = function(text, fileName) {
-    text = text.replace(/\n/g, '\r\n');
+    text = text.replace(/\n/g, "\r\n");
     var str_array = Encoding.stringToCode(text);
     var sjis_array = Encoding.convert(str_array, "SJIS", "UNICODE");
     var uint8_array = new Uint8Array(sjis_array);
