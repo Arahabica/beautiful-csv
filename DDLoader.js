@@ -43,18 +43,10 @@ var DDLoader = (function() {
   };
 
   DDLoader.prototype.saveUTF16Bom = function(text, fileName) {
-    text = "\ufffe" + text; // add BOM ((；ﾟДﾟ)
-
-    //convert to UTF-16
-    var array = [];
-    for (var i = 0; i < text.length; i++) {
-      array.push(text.charCodeAt(i));
-    }
-    var csv_contents = new Uint16Array(array);
-
-    var blob = new Blob([csv_contents], {
-      type: "text/csv;charset=utf-16;"
-    });
+    var str_array = Encoding.stringToCode(text);
+    var sjis_array = Encoding.convert(str_array, "SJIS", "UNICODE");
+    var uint8_array = new Uint8Array(sjis_array);
+    var blob = new Blob([uint8_array], { type: "text/csv;" });
     this.saveBlob(blob, fileName);
   };
 

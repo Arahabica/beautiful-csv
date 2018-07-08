@@ -90,20 +90,20 @@
       }
     };
     reader.readAsArrayBuffer(file);
+
+    // see: https://github.com/mathiasbynens/String.fromCodePoint/issues/1
+    function handleCodePoints(array) {
+      var CHUNK_SIZE = 0x8000; // arbitrary number here, not too small, not too big
+      var index = 0;
+      var length = array.length;
+      var result = "";
+      var slice;
+      while (index < length) {
+        slice = array.slice(index, Math.min(index + CHUNK_SIZE, length)); // `Math.min` is not really necessary here I think
+        result += String.fromCharCode.apply(null, slice);
+        index += CHUNK_SIZE;
+      }
+      return result;
+    }
   };
 })(window, window.document);
-
-// see: https://github.com/mathiasbynens/String.fromCodePoint/issues/1
-function handleCodePoints(array) {
-  var CHUNK_SIZE = 0x8000; // arbitrary number here, not too small, not too big
-  var index = 0;
-  var length = array.length;
-  var result = "";
-  var slice;
-  while (index < length) {
-    slice = array.slice(index, Math.min(index + CHUNK_SIZE, length)); // `Math.min` is not really necessary here I think
-    result += String.fromCharCode.apply(null, slice);
-    index += CHUNK_SIZE;
-  }
-  return result;
-}
