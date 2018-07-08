@@ -16,7 +16,6 @@ var DDLoader = (function() {
       e.preventDefault();
       var files = e.originalEvent.dataTransfer.files;
       for (var i = 0; i < files.length; i++) {
-        //render(files[i]);
         that.render(files[i], callback);
       }
     });
@@ -27,7 +26,6 @@ var DDLoader = (function() {
     $("#file_input").change(function() {
       var files = $(this).prop("files");
       for (var i = 0; i < files.length; i++) {
-        //render(files[i]);
         that.render(files[i], callback);
       }
     });
@@ -42,7 +40,8 @@ var DDLoader = (function() {
     this.saveBlob(blob, fileName);
   };
 
-  DDLoader.prototype.saveUTF16Bom = function(text, fileName) {
+  DDLoader.prototype.saveSJIS = function(text, fileName) {
+    text = text.replace(/\n/g, "\r\n");
     var str_array = Encoding.stringToCode(text);
     var sjis_array = Encoding.convert(str_array, "SJIS", "UNICODE");
     var uint8_array = new Uint8Array(sjis_array);
@@ -112,7 +111,7 @@ var DDLoader = (function() {
         that.toastError($toast, err.message);
       } else {
         if (contentType === "bom") {
-          that.saveUTF16Bom(data, filename);
+          that.saveSJIS(data, filename);
         } else {
           that.saveText(data, filename);
         }
