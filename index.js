@@ -16,6 +16,7 @@ $(function() {
           var filename =
             file.name.replace(/\.xlsm$/, "").replace(/\.xlsx$/, "") + ".csv";
           var data = xlsx.toCsv();
+          data = data.replace(/\r\n/g, "\n");
           callback(null, filename, data, "text");
         }
       });

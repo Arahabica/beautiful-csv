@@ -26,9 +26,15 @@
             var val = "";
             var cell = sheet[column + String(row)];
             if (cell) {
-              val = sheet[column + String(row)].v;
-              if (val instanceof Date) {
+              val = cell.w;
+              var v = sheet[column + String(row)].v;
+              if (v instanceof Date) {
                 val = moment(val).format("YYYY-MM-DD HH:mm:ss");
+              } else {
+                if (/\,/.test(val) || /\n/.test(val)) {
+                  val = val.replace(/"/g, '""');
+                  val = '"' + val + '"';
+                }
               }
               if (!val) {
                 val = "";
